@@ -1,0 +1,10 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+lib/tokyocafe.rb
+lib/tokyocafe/persistable.rb
+lib/tokyocafe/persistable/meta_classes.rb
+lib/tokyocafe/utils.rb
+lib/tokyocafe/version.rb
+test/test_tokyocafe.rb
