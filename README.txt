@@ -14,7 +14,14 @@
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+require 'tokyocafe'
+
+class MyClassTest
+  include TokyoCafe::Persistable
+  database 'db.hdb'
+  add_timestamp_for :on_create, :on_update
+  attr_accessor :name
+end
 
 == REQUIREMENTS:
 
@@ -31,7 +38,7 @@ sudo gem install tokyocafe
 
 (The MIT License)
 
-Copyright (c) 2008 FIX
+Copyright (c) 2009 spk
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
