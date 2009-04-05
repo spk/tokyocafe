@@ -12,8 +12,6 @@ Hoe.new('tokyocafe', TokyoCafe::VERSION::STRING) do |p|
    to TokyoCabinet (http://tokyocabinet.sourceforge.net/index.html) with Ruby
   DESC
   p.extra_deps = [
-    ['json', '>= 1.1.3'],
-    ['uuid', '>= 2.0.1'],
     #['libtokyocabinet-ruby', '>= 1.9'],
   ]
 end

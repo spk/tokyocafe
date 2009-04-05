@@ -18,20 +18,17 @@ require 'tokyocafe'
 
 class MyClassTest
   include TokyoCafe::Persistable
-  database 'db.hdb'
+  database 'db.tdb'
   add_timestamp_for :on_create, :on_update
   attr_accessor :name
 end
 
 == REQUIREMENTS:
 
-    ['json', '>= 1.1.3'],
-    ['uuid', '>= 2.0.1'],
-    ['libtokyocabinet-ruby', '>= 1.9'],
+    ['libtokyocabinet-ruby', '>= 1.21']
 
 == INSTALL:
 
-sudo aptitude install libtokyocabinet-ruby1.8
 sudo gem install tokyocafe
 
 == LICENSE:
