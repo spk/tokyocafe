@@ -17,13 +17,31 @@ module TokyoCafe
     end
 
     def save(db_uri = location)
+      perform_callback(:before_save)
+      tokyo_open
       @location = db_uri
       if new?
-        tokyo_create
+        performed = tokyo_create
       else
-        tokyo_update
+        performed = tokyo_update
       end
+      tokyo_close
+      perform_callback(:after_save)
+      performed
     end
+
+    def delete
+      performed = false
+      unless new?
+        perform_callback(:before_delete)
+        tokyo_open
+        performed = @tdb.out(self.id)
+        tokyo_close
+        perform_callback(:after_delete)
+      end
+      performed
+    end
+    alias destroy delete
 
     def to_s
       self.id
@@ -33,7 +51,13 @@ module TokyoCafe
       parameters = {}
       parameters['class'] = self.class.to_s
 
-      excluded_instance_variables = [:@location, :@created_at, :@updated_at, :@tdb]
+      if RUBY_VERSION.to_f > 1.8
+        excluded_instance_variables = [:@location, :@created_at,
+                                       :@updated_at, :@tdb]
+      else
+        excluded_instance_variables = ['@location', '@created_at',
+                                       '@updated_at', '@tdb']
+      end
       instance_variables = self.instance_variables - excluded_instance_variables
       instance_variables.each do |k|
         key = k[1..-1]
@@ -70,36 +94,44 @@ module TokyoCafe
     end
 
     protected
-    def tokyo_create
-      if !@tdb.open(location, TDB::OWRITER | TDB::OCREAT)
+    def tokyo_open
+      unless @tdb.open(location, TDB::OWRITER | TDB::OCREAT)
         ecode = @tdb.ecode
         STDERR.printf("open error: %s\n", @tdb.errmsg(ecode))
-      end
-      hash_value = self.to_h
-
-      uid = @tdb.genuid
-      doc_hash = hash_value.merge({'id' => uid})
-
-      if @tdb.put(uid, doc_hash)
-        @id = uid
-        if self.class::tokyo_cafe_timestamp_on_create?
-          @created_at = Time.now.to_s
-        end
-        true
-      else
-        ecode = @tdb.ecode
-        STDERR.printf("put error: %s\n", @tdb.errmsg(ecode))
-        false
       end
     end
 
+    def tokyo_close
+      @tdb.close
+    end
+
+    def tokyo_create
+      perform_callback(:before_create)
+
+      hash_value = self.to_h
+
+      pkey = @tdb.genuid
+      doc_hash = hash_value.merge({'id' => pkey})
+
+      if @tdb.put(pkey, doc_hash)
+        @id = pkey
+        if self.class::tokyo_cafe_timestamp_on_create?
+          @created_at = Time.now.to_s
+        end
+        performed = true
+      else
+        ecode = @tdb.ecode
+        STDERR.printf("put error: %s\n", @tdb.errmsg(ecode))
+        performed = false
+      end
+      perform_callback(:after_create)
+      performed
+    end
+
     def tokyo_update
+      perform_callback(:before_update)
       if self.class::tokyo_cafe_timestamp_on_update?
         @updated_at = Time.now.to_s
-      end
-      if !@tdb.open(location, TDB::OWRITER | TDB::OCREAT)
-        ecode = @tdb.ecode
-        STDERR.printf("open error: %s\n", @tdb.errmsg(ecode))
       end
 
       doc_value = self.to_h
@@ -108,12 +140,25 @@ module TokyoCafe
         if self.class::tokyo_cafe_timestamp_on_create?
           @created_at = created_at
         end
-        true
+        performed = true
       else
         ecode = @tdb.ecode
         STDERR.printf("put error: %s\n", @tdb.errmsg(ecode))
-        false
+        performed = false
       end
+      perform_callback(:after_update)
+      performed
+    end
+
+    #
+    # Performs callbacks before and after these events:
+    # * create
+    # * update
+    # * save
+    # * delete
+    #
+    def perform_callback(the_callback)
+      self.send(the_callback) if self.respond_to?(the_callback)
     end
 
     module ClassMethods
