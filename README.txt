@@ -1,17 +1,10 @@
 = tokyocafe
 
-* http://gitorious.org/tokyocafe
-* http://github.com/spk/tokyocafe/tree/master
-
 == DESCRIPTION:
 
    TokyoCafe is a set of classes to help you talk
    to TokyoCabinet (http://tokyocabinet.sourceforge.net/index.html) with Ruby
    Grately inspired from http://couchobject.rubyforge.org/
-
-== FEATURES/PROBLEMS:
-
-* FIX (list of features or problems)
 
 == SYNOPSIS:
 
@@ -37,7 +30,8 @@ end
 
 == INSTALL:
 
-sudo gem install tokyocafe
+rake gem
+gem install pkg/tokyocafe*
 
 == LICENSE:
 
