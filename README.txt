@@ -1,6 +1,7 @@
 = tokyocafe
 
-* FIX (url)
+* http://gitorious.org/tokyocafe
+* http://github.com/spk/tokyocafe/tree/master
 
 == DESCRIPTION:
 
@@ -20,8 +21,15 @@ class MyClassTest
   include TokyoCafe::Persistable
   database 'db.tdb'
   add_timestamp_for :on_create, :on_update
+
   attr_accessor :name
+
+  def before_delete
+    puts self.to_h.inspect
+  end
 end
+
+# See test/test_tokyocafe.rb for more info
 
 == REQUIREMENTS:
 

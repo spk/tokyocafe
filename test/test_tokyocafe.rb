@@ -7,27 +7,41 @@ class MyClassTest
   include TokyoCafe::Persistable
   database 'db.tdb'
   add_timestamp_for :on_create, :on_update
-  def before_delete
-    p self.to_h
-  end
+
   attr_accessor :name
+
+  def before_delete
+    puts self.to_h.inspect
+  end
 end
 
 class TokyoCafeTest < Test::Unit::TestCase
+
   def default_test
-    # save
+    save_test
+    get_test
+    delete_test
+  end
+
+  def save_test
     t = MyClassTest.new
     t.name = 'éeee'
     assert t.new?
     assert t.save
-    id = t.id
-    # get
+    t.id
+  end
+
+  def get_test
+    id = save_test
     a = MyClassTest.get(id)
     assert !a.new?
     a.name = 'eeeé'
-    sleep 1
     assert a.save
-    # delete
+    a.id
+  end
+
+  def delete_test
+    id = get_test
     b = MyClassTest.get(id)
     assert b.delete
   end
