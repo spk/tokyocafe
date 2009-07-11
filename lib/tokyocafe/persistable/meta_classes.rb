@@ -58,7 +58,7 @@ module TokyoCafe
         #
         #   class AppleTree
         #     include TokyoCafe::Persistable
-        #     database 'db/db.tdb'
+        #     database 'db/db.tct'
         #   end
         #
         #   apple_tree = AppleTree.new

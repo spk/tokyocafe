@@ -12,7 +12,7 @@ require 'tokyocafe'
 
 class MyClassTest
   include TokyoCafe::Persistable
-  database 'db.tdb'
+  database 'db.tct'
   add_timestamp_for :on_create, :on_update
 
   attr_accessor :name
