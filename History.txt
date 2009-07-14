@@ -1,0 +1,48 @@
+commit 24a47408bc87f655ed0a2beea729437fc83ba31d
+Author: spk <spk@spk-laptop.(none)>
+Date:   Sat Jul 11 19:45:15 2009 +0200
+
+    add search and other improv
+
+commit 5d9a3538948ac19abf09359cc1d12c3646ecbf18
+Author: spk <spk@spk-laptop.(none)>
+Date:   Wed Jun 24 23:36:38 2009 +0200
+
+    readme and rakefile update
+
+commit 6f72050a94e93e81dd5c2a3f4ad23c91f4da8dd7
+Author: spk <spk@spk-laptop.(none)>
+Date:   Wed Jun 24 22:21:00 2009 +0200
+
+    update README url
+
+commit ded4e134656ad6692c48aa17381b77a2eed8ca03
+Author: spk <spk@spk-laptop.(none)>
+Date:   Sat May 23 22:06:07 2009 +0200
+
+    add filter and some other update
+
+commit 671e8f9c6764228c859c229e4b6285a0bbe24d1e
+Author: spk <spk@spk-laptop.(none)>
+Date:   Sun Apr 5 19:43:50 2009 +0200
+
+    maj update of tokyocabinet (1.4.12) and use Table database (TDB)
+    instead of HDB and json
+
+commit a35cccba409dec68161f3541f2d0168fe57a4e31
+Author: spk <spk@spk-laptop.(none)>
+Date:   Wed Feb 18 17:32:48 2009 +0100
+
+    fix README
+
+commit c4e5016bdeea9cd628887809ac04c34fa6be6c21
+Author: spk <spk@spk-laptop.(none)>
+Date:   Wed Feb 18 17:04:20 2009 +0100
+
+    initial commit
+
+commit bbcf614625525c057c69f26664662e1f905f515b
+Author: spk <spk@spk-laptop.(none)>
+Date:   Wed Feb 18 17:03:47 2009 +0100
+
+    initial commit
