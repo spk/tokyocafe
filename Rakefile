@@ -10,7 +10,7 @@ PKG_NAME = 'tokyocafe'
 PKG_VERSION = '0.0.2'
 
 PKG_FILES = ['README.rdoc', 'Rakefile']
-Find.find('lib/') do |f|
+Find.find('lib/', 'test/') do |f|
   if FileTest.directory?(f) and f =~ /\.svn|\.git/
     Find.prune
   else
