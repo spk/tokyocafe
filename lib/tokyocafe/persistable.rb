@@ -201,7 +201,7 @@ module TokyoCafe
         end
         if options.include?(:order)
           options[:order].each do |k,v|
-            qry.setorder(k.to_s, TDBQRY.const_get("QOSTR#{v.upcase}"))
+            qry.setorder(k.to_s, TDBQRY.const_get("QOSTR#{v.to_s.upcase}"))
           end
         end
         res = qry.search
