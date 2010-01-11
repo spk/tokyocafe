@@ -3,7 +3,7 @@
 == DESCRIPTION:
 
    TokyoCafe is a set of classes to help you talk
-   to TokyoCabinet (http://tokyocabinet.sourceforge.net/index.html) with Ruby
+   to TokyoCabinet ( http://1978th.net/tokyocabinet/ ) with Ruby
 
 == SYNOPSIS:
 
